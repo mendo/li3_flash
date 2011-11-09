@@ -73,6 +73,23 @@ class Flash extends \lithium\template\Helper {
 		return $output;
 	}
 
+	/**
+	 * Returns a flash message.
+	 * The message will be cleared afterwards.
+	 *
+	 * @param string [$key] Optional message key.
+	 */
+	public function get_message($key = 'default') {
+		$storage = $this->_classes['storage'];
+		$flash = $storage::read($key);
+
+		if (!empty($flash)) {
+		  $storage::clear($key);
+			return $flash;
+		}
+		return array();
+	}
+
 }
 
 ?>
